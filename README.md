@@ -1,14 +1,15 @@
 # Client Term Deposit Subscription Analysis
 
 ## **Project Overview**
-This repository contains the analysis of client subscription behavior for term deposits. Using a dataset with demographic, financial, and campaign-related features, we aim to uncover insights that can optimize marketing strategies and enhance client engagement. This documentation includes **Milestone 1**, which covers extensive Exploratory Data Analysis (EDA) and preprocessing of the data.
+This repository contains the analysis of client subscription behavior for term deposits. Using a dataset with demographic, financial, and campaign-related features, we aim to uncover insights that can optimize marketing strategies and enhance client engagement. This documentation includes **Milestone 1** (EDA and preprocessing) and **Milestone 2** (feature transformation and model training).
 
 ---
 
-## **Milestone 1: Exploratory Data Analysis and Preprocessing**
+## **Milestones**
 
-### **1. Data Understanding**
-#### **Dataset Overview**
+### **Milestone 1: Exploratory Data Analysis and Preprocessing**
+
+#### **1. Data Understanding**
 The dataset contains information about clients, including their demographics, past interactions, financial status, and marketing outcomes. The target variable (`y`) indicates whether a client subscribed to a term deposit.
 
 | Feature Name       | Description                                                                                   | Type            |
@@ -33,101 +34,82 @@ The dataset contains information about clients, including their demographics, pa
 
 ---
 
-### **2. Data Preprocessing**
-#### **Handling Missing Values**
-- **`contact` and `poutcome`:** Missing values were replaced with `"unknown"`.
-- **`pdays`:** Missing values were imputed with `-1` to signify no previous contact.
+#### **2. Data Preprocessing**
+1. **Handling Missing Values**:
+   - `contact` and `poutcome`: Missing values replaced with `"unknown"`.
+   - `pdays`: Missing values imputed with `-1` to signify no previous contact.
 
-#### **Encoding Categorical Variables**
-- **One-hot encoding:** Applied to categorical variables such as `job`, `education`, `contact`, and `poutcome`, converting each category into a binary column.
-- **Binary encoding:** Used for `housing` and `loan` features.
+2. **Encoding Categorical Variables**:
+   - **One-hot encoding** applied to `job`, `education`, `contact`, and `poutcome`.
+   - **Binary encoding** used for `housing` and `loan`.
 
-#### **Scaling Numerical Features**
-- Numerical features like `age`, `balance`, `campaign`, and `pdays` were standardized for consistent scaling, ensuring compatibility with machine learning models.
-
----
-
-### **3. Exploratory Data Analysis (EDA)**
-
-#### **Summary Statistics**
-Key metrics for numerical features were analyzed:
-- Mean `age`: ~40 years
-- Median yearly balance: ~€400
-- High variability observed in `campaign` and `duration`.
-
-#### **Visualizations and Key Insights**
-1. **Job**:
-   - **Subscription rates:**
-     - Higher: `Student` (28%), `Retired` (25%)
-     - Lower: `Blue-collar` (7%), `Unemployed` (8%)
-   - **Insight:** Students and retired clients are highly likely to subscribe, while blue-collar workers and unemployed individuals require targeted strategies.
-
-2. **Marital Status**:
-   - **Subscription rates:**
-     - Single: 14.4%
-     - Divorced: 11.4%
-     - Married: 9.6%
-   - **Insight:** Singles show the highest likelihood of subscribing, whereas married clients have the lowest.
-
-3. **Education Level**:
-   - **Subscription rates:**
-     - Higher: University degree (20%), Professional courses (17%)
-     - Lower: Basic education levels (e.g., basic.4y: 4.5%)
-   - **Insight:** Higher education levels correlate with higher subscription rates.
-
-4. **Contact Type**:
-   - **Subscription rates:**
-     - Cellular: 13.7%
-     - Telephone: 4.5%
-     - Unknown: 2.5%
-   - **Insight:** Cellular is the most effective contact method.
-
-5. **Poutcome**:
-   - **Subscription rates:**
-     - Success: 65.3%
-     - Failure: 13.8%
-     - Nonexistent: 9.5%
-   - **Insight:** Successful outcomes from previous campaigns strongly indicate future subscription likelihood.
-
-#### **Correlation Analysis**
-A correlation heatmap revealed:
-- Strong positive correlation between `previous` and `poutcome_success`.
-- Weak correlation between demographic features like `age` and the target variable (`y`).
+3. **Scaling Numerical Features**:
+   - Standardized features such as `age`, `balance`, `campaign`, and `pdays`.
 
 ---
 
-### **4. Feature Importance**
-Based on EDA, the following features are identified as significant for predictive modeling:
-- **Highly Relevant:**
-  - `job`
-  - `education`
-  - `contact`
-  - `poutcome`
-  - `balance`
-- **Excluded:**
-  - `duration` (not used for realistic predictions, per guidelines)
+#### **3. Exploratory Data Analysis (EDA)**
+1. **Key Insights**:
+   - Higher subscription rates observed in students, retirees, and university-educated individuals.
+   - Cellular contact methods are most effective.
+   - Previous campaign success strongly predicts future subscription likelihood.
+
+2. **Correlation Analysis**:
+   - Revealed strong correlations between certain features (`previous`, `poutcome_success`).
 
 ---
 
-### **5. Recommendations**
-1. **Marketing Strategies:**
-   - Focus campaigns on high-performing groups like students, retirees, and university-educated individuals.
-   - Leverage cellular contact methods for engagement.
+### **Milestone 2: Feature Transformation and Model Training**
 
-2. **Next Steps:**
-   - Perform cross-variable analysis (e.g., job and education level).
-   - Build predictive models using identified features.
+#### **1. Feature Transformation**
+1. **Scaling**: Standardized numerical features using `StandardScaler`.
+2. **Encoding**: Applied one-hot encoding to categorical features.
+
+#### **2. Data Splitting**
+- Divided the dataset into training (80%) and testing (20%) sets.
+
+#### **3. Model Training**
+Three machine learning models were trained:
+1. **Logistic Regression**:
+   - Baseline model to provide interpretable results.
+2. **Random Forest**:
+   - Ensemble model for robust performance and reduced overfitting.
+3. **Gradient Boosting (XGBoost)**:
+   - High-accuracy model suitable for structured datasets.
+
+#### **4. Hyperparameter Tuning (Optional)**
+- Performed grid search to optimize model parameters:
+   - Random Forest: Tuned `n_estimators`, `max_depth`, `min_samples_split`.
+   - XGBoost: Tuned `n_estimators`, `learning_rate`, `max_depth`.
 
 ---
 
-## **Future Milestones**
-### **Milestone 2: Modeling**
-Develop machine learning models for predicting term deposit subscription (`y`), leveraging insights from Milestone 1.
+## **Results and Outputs**
+1. **Preprocessed Dataset**: Complete feature set ready for modeling.
+2. **Trained Models**: Logistic Regression, Random Forest, and XGBoost.
+3. **Best Hyperparameters** (optional):
+   - **Random Forest**: Optimal number of trees and depth.
+   - **XGBoost**: Ideal learning rate, depth, and number of estimators.
+
+---
+
+## **Next Steps**
+The next milestone focuses on **model evaluation**, where we will assess the models’ performance using metrics such as accuracy, precision, recall, and F1-score. The best model will then be used for predictions.
+
+---
+
+## **Files and Directories**
+- **`data/`**: Contains the dataset files (`df_X.csv`, `df_y.csv`, `info.csv`).
+- **`notebooks/`**: Includes separate notebooks for each milestone:
+   - `milestone_1.ipynb`: Exploratory Data Analysis and Preprocessing.
+   - `milestone_2.ipynb`: Feature Transformation and Model Training.
+- **`models/`**: Stores trained model artifacts (optional).
+- **`README.md`**: Comprehensive project documentation.
 
 ---
 
 ## **Acknowledgments**
-Thank you for visiting this repository. If you have questions or suggestions, feel free to contribute or raise an issue.
+Thank you for visiting this repository! Feel free to contribute or raise issues if you have suggestions or questions.
 
 ---
 
