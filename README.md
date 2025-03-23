@@ -101,8 +101,8 @@ The next milestone focuses on **model evaluation**, where we will assess the mod
 ## **Files and Directories**
 - **`data/`**: Contains the dataset files (`df_X.csv`, `df_y.csv`, `info.csv`).
 - **`notebooks/`**: Includes separate notebooks for each milestone:
-   - `milestone_1.ipynb`: Exploratory Data Analysis and Preprocessing.
-   - `milestone_2.ipynb`: Feature Transformation and Model Training.
+   - `Bank Marketing Dataset_Milestone_1.ipynb`: Exploratory Data Analysis and Preprocessing.
+   - `Bank Marketing Dataset_Milestone_2.ipynb`: Feature Transformation and Model Training.
 - **`models/`**: Stores trained model artifacts (optional).
 - **`README.md`**: Comprehensive project documentation.
 
